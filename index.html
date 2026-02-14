@@ -8,27 +8,22 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #ff9ecf, #ff4d6d);
+  background: linear-gradient(to bottom right, #b30f4a, #ff4d6d); /* Dark pink gradient */
   color: white;
   text-align: center;
   overflow: hidden;
   height: 100vh;
 }
 
+/* Hearts floating up continuously */
 .heart, .floating-heart {
   position: absolute;
-  color: #ff4d6d;
+  color: #ffccd5;
   font-size: 25px;
-  animation: fall linear infinite;
 }
 
 .floating-heart {
   animation: floatUp 2s ease-out forwards;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-50px) rotate(0deg); opacity:1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
 }
 
 @keyframes floatUp {
@@ -48,17 +43,18 @@ h1 {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   padding: 20px;
   border-radius: 15px;
   margin: 20px auto;
-  max-width: 500px;
+  max-width: 600px;
   backdrop-filter: blur(10px);
+  text-align: left;
 }
 
 button {
   background: white;
-  color: #ff4d6d;
+  color: #b30f4a;
   border: none;
   padding: 12px 25px;
   border-radius: 25px;
@@ -87,6 +83,11 @@ button:hover {
   </div>
 
   <div class="card">
+    <h2>Our Special Message 💌</h2>
+    <p>"Every moment with you feels like a beautiful dream I never want to wake up from. Your smile lights up the darkest of days, and your laughter is the melody that my heart dances to. Being with you makes me feel complete, like I’ve found the piece of my soul I didn’t even know was missing. I love you not just for who you are, but for how I am when I’m with you — happier, calmer, and more alive. You are my today, my tomorrow, and every heartbeat in between."</p>
+  </div>
+
+  <div class="card">
     <h2>Our Song 🎶</h2>
     <!-- Embedded YouTube -->
     <iframe width="100%" height="200"
@@ -105,24 +106,33 @@ button:hover {
 </div>
 
 <script>
-// Falling hearts background
-function createHeart() {
+// Continuous floating hearts in the background
+function createFloatingHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
   heart.style.left = Math.random() * window.innerWidth + 'px';
-  heart.style.fontSize = (10 + Math.random() * 20) + 'px';
-  heart.style.animationDuration = (3 + Math.random() * 5) + 's';
-  heart.textContent = '❤️';
+  heart.style.bottom = '-50px';
+  heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+  heart.style.opacity = Math.random() * 0.8 + 0.2;
+  heart.style.transition = 'transform 10s linear, opacity 10s linear';
   document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 8000);
-}
-setInterval(createHeart, 300);
 
-// Button click animation
+  // Animate upward
+  setTimeout(() => {
+    heart.style.transform = `translateY(-${window.innerHeight + 50}px) rotate(${Math.random()*360}deg)`;
+    heart.style.opacity = 0;
+  }, 50);
+
+  // Remove after animation
+  setTimeout(() => heart.remove(), 10000);
+}
+
+// Generate a heart every 300ms
+setInterval(createFloatingHeart, 300);
+
+// Button click floating hearts
 function showMessage() {
   document.getElementById("secretMessage").style.display = "block";
-
-  // Create floating hearts
   for(let i=0; i<10; i++){
     const fHeart = document.createElement('div');
     fHeart.className = 'floating-heart';
@@ -138,5 +148,4 @@ function showMessage() {
 
 </body>
 </html>
-
 
