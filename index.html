@@ -15,16 +15,25 @@ body {
   height: 100vh;
 }
 
-.heart {
+.heart, .floating-heart {
   position: absolute;
   color: #ff4d6d;
   font-size: 25px;
   animation: fall linear infinite;
 }
 
+.floating-heart {
+  animation: floatUp 2s ease-out forwards;
+}
+
 @keyframes fall {
   0% { transform: translateY(-50px) rotate(0deg); opacity:1; }
   100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity:1; }
+  100% { transform: translateY(-200px) scale(1.5); opacity:0; }
 }
 
 .container {
@@ -79,7 +88,14 @@ button:hover {
 
   <div class="card">
     <h2>Our Song 🎶</h2>
-    <p>Add your special song here</p>
+    <!-- Embedded YouTube -->
+    <iframe width="100%" height="200"
+      src="https://www.youtube.com/embed/pyGU-UudvrM?autoplay=1&mute=0&loop=1&playlist=pyGU-UudvrM"
+      title="Valentine Song"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
   </div>
 
   <button onclick="showMessage()">Click Me ❤️</button>
@@ -89,7 +105,7 @@ button:hover {
 </div>
 
 <script>
-// Falling hearts generator
+// Falling hearts background
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
@@ -98,18 +114,29 @@ function createHeart() {
   heart.style.animationDuration = (3 + Math.random() * 5) + 's';
   heart.textContent = '❤️';
   document.body.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 8000);
+  setTimeout(() => heart.remove(), 8000);
 }
 setInterval(createHeart, 300);
 
-// Button message
+// Button click animation
 function showMessage() {
   document.getElementById("secretMessage").style.display = "block";
+
+  // Create floating hearts
+  for(let i=0; i<10; i++){
+    const fHeart = document.createElement('div');
+    fHeart.className = 'floating-heart';
+    fHeart.style.left = (window.innerWidth/2 + (Math.random()*100 -50)) + 'px';
+    fHeart.style.top = (window.innerHeight/2 + (Math.random()*50 -25)) + 'px';
+    fHeart.style.fontSize = (15 + Math.random()*20) + 'px';
+    fHeart.textContent = '💖';
+    document.body.appendChild(fHeart);
+    setTimeout(() => fHeart.remove(), 2000);
+  }
 }
 </script>
 
 </body>
 </html>
+
+
