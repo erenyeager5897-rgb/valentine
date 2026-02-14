@@ -11,15 +11,16 @@ body {
   background: linear-gradient(to bottom right, #b30f4a, #ff4d6d); /* Dark pink gradient */
   color: white;
   text-align: center;
-  overflow: hidden;
-  height: 100vh;
+  overflow-y: auto;  /* allow vertical scrolling */
+  height: auto;      /* body grows with content */
+  position: relative; /* hearts positioned relative to body */
 }
 
-/* Hearts floating up continuously */
 .heart, .floating-heart {
   position: absolute;
   color: #ffccd5;
   font-size: 25px;
+  z-index: 0; /* behind content */
 }
 
 .floating-heart {
@@ -33,7 +34,7 @@ body {
 
 .container {
   position: relative;
-  z-index: 10;
+  z-index: 10; /* content above hearts */
   padding: 40px 20px;
 }
 
@@ -115,6 +116,7 @@ function createFloatingHeart() {
   heart.style.fontSize = (15 + Math.random() * 20) + 'px';
   heart.style.opacity = Math.random() * 0.8 + 0.2;
   heart.style.transition = 'transform 10s linear, opacity 10s linear';
+  heart.textContent = '❤️';
   document.body.appendChild(heart);
 
   // Animate upward
@@ -148,4 +150,6 @@ function showMessage() {
 
 </body>
 </html>
+
+
 
