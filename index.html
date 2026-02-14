@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day ❤️</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #ff9ecf, #ff4d6d);
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 25px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-50px) rotate(0deg); opacity:1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px auto;
+  max-width: 500px;
+  backdrop-filter: blur(10px);
+}
+
+button {
+  background: white;
+  color: #ff4d6d;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background: #ffe3ec;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Happy Valentine's Day, Jennita Grace ❤️</h1>
+  <p>You make my world brighter every single day.</p>
+
+  <div class="card">
+    <h2>Why I Love You</h2>
+    <p>💖 Your beautiful smile</p>
+    <p>💖 The way you care about me</p>
+    <p>💖 Your laugh</p>
+    <p>💖 Everything about you</p>
+  </div>
+
+  <div class="card">
+    <h2>Our Song 🎶</h2>
+    <p>Add your special song here</p>
+  </div>
+
+  <button onclick="showMessage()">Click Me ❤️</button>
+  <p id="secretMessage" style="display:none; margin-top:15px; font-size:18px;">
+    I can't wait to spend forever with you. 💍
+  </p>
+</div>
+
+<script>
+// Falling hearts generator
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+  heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+  heart.textContent = '❤️';
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 8000);
+}
+setInterval(createHeart, 300);
+
+// Button message
+function showMessage() {
+  document.getElementById("secretMessage").style.display = "block";
+}
+</script>
+
+</body>
+</html>
